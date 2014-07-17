@@ -21,7 +21,7 @@ public class QuickSort {
     }
 
     /**
-     * Not currect!
+     * Not correct, figure it out later.
      * @param src
      * @param start
      * @param end
