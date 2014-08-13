@@ -76,6 +76,7 @@ public class MergeSort {
 
     /**
      * This should be the optimal MergeSort.
+     * This method can modify the original array to a sorted array.
      * @param src
      */
     public static void sort(int[] src){
@@ -85,7 +86,6 @@ public class MergeSort {
 
 
     private static void mergeSort(int[] src, int start, int end){
-        System.out.println(start + "  " + end);
         if (start < end){
             int middle = (end + start)/2;
             mergeSort(src,start,middle);
@@ -95,34 +95,41 @@ public class MergeSort {
     }
 
     private static void merge(int[] src, int start, int middle, int end){
-        System.out.println(start + "  " + middle + "  " + end);
-        int k = start, i = start, j = middle;
-        for (; i < middle ; i++,k++){
-            for (; j <= end; j++,k++){
-                if (src[i] > src[j]){
-                    System.out.println("----- " + src[j]);
-                    sortHelper[k] = src[j];
-                } else {
-                    System.out.println("-----> " + src[i]);
-                    sortHelper[k] = src[i];
-                    break;
-                }
+        // in order to make this algorithm right, j must be middle + 1 here, this means merge start -> middle, and middle + 1 -> end.
+        // because in java, odd number divided by 2 yields smaller number (e.g. 3/2 = 1)
+        int i = start, j = middle + 1, k = start;
+        while (i <= middle && j <= end){
+            if (src[i] < src[j]){
+                sortHelper[k] = src[i];
+                i++;
+            }else {
+                sortHelper[k] = src[j];
+                j++;
             }
+            k++;
         }
 
+        //add the left to the tail
+        while (i <= middle){
+            sortHelper[k] = src[i];
+            i++;k++;
+        }
+        while (j <= end) {
+            sortHelper[k] = src[j];
+            j++;k++;
+        }
 
         // copy helper to src
         for (int l = start ; l <= end; l++){
-
             src[l] = sortHelper[l];
         }
     }
 
     public static void main(String[] dd){
         int[] array = {8,4,1,3,7,9,2,10,5,6,12,102,32,2};
-        int[] array1 = {8,4,1,3};
-        MergeSort.sort(array1);
-        for (int one : array1){
+        int[] array1 = {8,4};
+        MergeSort.sort(array);
+        for (int one : array){
             System.out.print(one + ",");
         }
     }
