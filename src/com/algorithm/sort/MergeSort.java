@@ -9,53 +9,120 @@ package com.algorithm.sort;
  */
 public class MergeSort {
 
-    public static int[] sort(int[] src){
-        if (src.length == 1) {
-            return src;
+    /**
+     * This is a bad fucking solution!!!
+     */
+//    public static int[] BADsort(int[] src){
+//        int[] tmpArray = new int[src.length];
+//        return MergeSort.BADsort(src,tmpArray);
+//    }
+
+    /**
+     * This is a bad fucking solution!!!
+     */
+//    public static int[] BADsort(int[] src, int[] tmpArray){
+//        if (src.length == 1) {
+//            return src;
+//        }
+//
+//        // clear the temp array
+//        for (int i = 1; i < tmpArray.length; i++){
+//            //tmpArray[i] = null;
+//        }
+//
+//        int length = src.length;
+//        int pivot =length/2;
+//
+//        int[] left = new int[length/2];
+//        int[] right = new int[length - length/2];
+//        for (int i = 0 ; i < pivot; i++){
+//            left[i] = src[i];
+//
+//        }
+//        for (int i = pivot ; i < length; i++){
+//            right[i-pivot] = src[i];
+//        }
+//        int[] leftresult = sort(left);
+//        int[] rightresult = sort(right);
+//        int i = 0,j = 0,k = 0;
+//
+//        while(i < leftresult.length && j < rightresult.length) {
+//            if (leftresult[i] < rightresult[j]){
+//                tmpArray[k] = leftresult[i];
+//                i ++;
+//            } else {
+//                tmpArray[k] = rightresult[j];
+//                j ++;
+//            }
+//            k++;
+//        }
+//
+//        for (;i < leftresult.length; i ++, k ++){
+//            tmpArray[k] = leftresult[i];
+//        }
+//        for (;j < rightresult.length; j ++, k ++){
+//            tmpArray[k] = rightresult[j];
+//        }
+//
+//        return tmpArray;
+//    }
+
+    // -----------
+
+    /**
+     * for extra storage of Merge sort.
+     */
+    private static int[] sortHelper = null;
+
+    /**
+     * This should be the optimal MergeSort.
+     * @param src
+     */
+    public static void sort(int[] src){
+        sortHelper = new int[src.length];
+        mergeSort(src,0,src.length - 1);
+    }
+
+
+    private static void mergeSort(int[] src, int start, int end){
+        System.out.println(start + "  " + end);
+        if (start < end){
+            int middle = (end + start)/2;
+            mergeSort(src,start,middle);
+            mergeSort(src,middle + 1,end);
+            merge(src,start,middle,end);
         }
+    }
 
-        int length = src.length;
-        int pivot =length/2;
-
-        int[] left = new int[length/2];
-        int[] right = new int[length - length/2];
-        for (int i = 0 ; i < pivot; i++){
-            left[i] = src[i];
-
-        }
-        for (int i = pivot ; i < length; i++){
-            right[i-pivot] = src[i];
-        }
-        int[] leftresult = sort(left);
-        int[] rightresult = sort(right);
-        int[] result = new int[length];
-        int i = 0,j = 0,k = 0;
-
-        while(i < leftresult.length && j < rightresult.length) {
-            if (leftresult[i] < rightresult[j]){
-                result[k] = leftresult[i];
-                i ++;
-            } else {
-                result[k] = rightresult[j];
-                j ++;
+    private static void merge(int[] src, int start, int middle, int end){
+        System.out.println(start + "  " + middle + "  " + end);
+        int k = start, i = start, j = middle;
+        for (; i < middle ; i++,k++){
+            for (; j <= end; j++,k++){
+                if (src[i] > src[j]){
+                    System.out.println("----- " + src[j]);
+                    sortHelper[k] = src[j];
+                } else {
+                    System.out.println("-----> " + src[i]);
+                    sortHelper[k] = src[i];
+                    break;
+                }
             }
-            k++;
         }
 
-        for (;i < leftresult.length; i ++, k ++){
-            result[k] = leftresult[i];
-        }
-        for (;j < rightresult.length; j ++, k ++){
-            result[k] = rightresult[j];
-        }
 
-        return result;
+        // copy helper to src
+        for (int l = start ; l <= end; l++){
+
+            src[l] = sortHelper[l];
+        }
     }
 
     public static void main(String[] dd){
         int[] array = {8,4,1,3,7,9,2,10,5,6,12,102,32,2};
-        int[] result = MergeSort.sort(array);
-        for (int one : result){
+        int[] array1 = {8,4,1,3};
+        MergeSort.sort(array1);
+        for (int one : array1){
             System.out.print(one + ",");
         }
     }
