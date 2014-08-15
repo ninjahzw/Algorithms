@@ -1,6 +1,7 @@
 package com.problems;
 
 import java.util.LinkedList;
+import java.util.List;
 
 /**
  * Created by houzhaowei on 8/10/14.
@@ -9,7 +10,7 @@ import java.util.LinkedList;
  */
 public class SortLinkedList {
 
-    private class ListNode{
+    private static class ListNode{
         private int value;
         private ListNode next;
 
@@ -40,16 +41,18 @@ public class SortLinkedList {
     /**
      * for extra storage of Merge sort.
      */
-    private static ListNode[] sortHelper = null;
+    private static ListNode helper;
+
+    private static List<String> list = new LinkedList<String>();
 
     public static void sort(ListNode startNode){
         int length = 0;
-
+        helper = new SortLinkedList.ListNode(0);
         ListNode node = startNode;
         // initialize the length of the linked list.
-        while (node.next != null){
+        while (node.getNext() != null){
             length ++;
-            node = node.next;
+            node = node.getNext();
         }
 
         mergeSort(startNode,length);
@@ -57,16 +60,16 @@ public class SortLinkedList {
 
 
     private static void mergeSort(ListNode startNode, int length){
-        if (startNode.next != null){
+        if (startNode.getNext() != null){
             int middle = (length)/2;
             ListNode middleNode = startNode;
             int index = 0;
-            while (middleNode.next != null){
+            while (middleNode.getNext() != null){
                 if (index == middle){
                     break;
                 }
                 index ++;
-                middleNode = middleNode.next;
+                middleNode = middleNode.getNext();
             }
             mergeSort(startNode, middle);
             mergeSort(middleNode,length - middle);
@@ -75,11 +78,45 @@ public class SortLinkedList {
     }
 
     public static void merge(ListNode start, ListNode end, int lengthStart, int lengthEnd){
-        int startIndex = 0, endIndex = 0;
+        int startIndex = 0, endIndex = 0, times = 0;
+        // Create a traverser to traverse the
+        ListNode traverser = helper;
+        while (start.getNext() != null && startIndex < lengthStart && end.getNext() != null && endIndex < lengthEnd){
 
-        while (start.next != null && startIndex < lengthStart && end.next != null && endIndex < lengthEnd){
             if (start.getValue() > end.getValue()){
+                ListNode newNode = new ListNode(end.getValue());
+                traverser.setNext(newNode);
+                traverser = newNode;
+                end = end.getNext();
+                endIndex ++;
+            } else {
+                ListNode newNode = new ListNode(start.getValue());
+                traverser.setNext(newNode);
+                traverser = newNode;
+                start = start.getNext();
+                startIndex ++;
+            }
 
+            while (startIndex < lengthStart){
+                ListNode newNode = new ListNode(start.getValue());
+                traverser.setNext(newNode);
+                traverser = newNode;
+                start = start.getNext();
+                startIndex ++;
+            }
+
+            while (endIndex < lengthEnd){
+                ListNode newNode = new ListNode(end.getValue());
+                traverser.setNext(newNode);
+                traverser = newNode;
+                end = end.getNext();
+                endIndex ++;
+            }
+
+            while (helper.getNext() != null){
+                start.setNext(helper.getNext());
+                helper = helper.getNext();
+                start = start.getNext();
             }
         }
     }

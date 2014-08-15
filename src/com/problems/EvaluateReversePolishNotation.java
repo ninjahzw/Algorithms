@@ -17,15 +17,56 @@ import java.util.Stack;
  */
 public class EvaluateReversePolishNotation {
 
-    public static char[] operators = {'+','-','*','/'};
+    public static String operators = "+-*/";
+    public static int ERROR_VALUE = -1000;
 
-    public static void calculate(String expression){
-        Stack<Character> stack = new Stack<Character>();
-        char[] chars = expression.toCharArray();
-        for (char one : chars){
+    public static int calculate(String[] tokens){
+        Stack<String> stack = new Stack<String>();
+        for (String one : tokens){
+            if (operators.contains(one)){
+                // there should be at least 2 value in the stack
+                if (stack.empty()){
+                    System.out.println("Error occurred when parsing");
+                    return ERROR_VALUE;
+                }
+                int first = Integer.parseInt(stack.pop());
 
+                if (stack.empty()){
+                    System.out.println("Error occurred when parsing");
+                    return ERROR_VALUE;
+                }
+                int second = Integer.parseInt(stack.pop());
+
+                // Attention! 'second' must be 'before' first in the following calculation!
+                // because 'stack' reverse the order!
+                switch (operators.indexOf(one)){
+                    case 0:
+                        stack.push(String.valueOf(second+first));
+                        break;
+                    case 1:
+                        stack.push(String.valueOf(second-first));
+                        break;
+                    case 2:
+                        stack.push(String.valueOf(second*first));
+                        break;
+                    case 3:
+                        stack.push(String.valueOf(second/first));
+                        break;
+                }
+
+
+            } else {
+                stack.push(one);
+            }
         }
-        //stack.push()
+        return Integer.valueOf(stack.pop());
+    }
+
+
+
+    public static void main (String[] args){
+        String[] test = {"0","3","/"};
+        System.out.println(EvaluateReversePolishNotation.calculate(test));
     }
 
 }
