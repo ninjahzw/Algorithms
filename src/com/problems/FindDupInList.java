@@ -31,4 +31,8 @@ package com.problems;
  */
 public class FindDupInList {
 
+    public double findMedianSortedArrays(int A[], int B[]) {
+
+        return 1;
+    }
 }
