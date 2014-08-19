@@ -1,4 +1,4 @@
-package com.problems;
+package com.leetcode;
 
 import java.util.Random;
 

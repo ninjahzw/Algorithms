@@ -1,6 +1,4 @@
-package com.problems;
-
-import java.util.LinkedList;
+package com.leetcode;
 
 /**
  * !! Important
