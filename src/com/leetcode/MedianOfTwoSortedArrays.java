@@ -1,6 +1,9 @@
 package com.leetcode;
 
 /**
+ * TODO!!!
+ *
+ *
  * Created by Zhaowei on 8/18/2014.
  *
  * Problem:
@@ -25,7 +28,7 @@ package com.leetcode;
  * Now if k<i+j, we can say for sure that our kth smallest element is not A[i] or any of A’s elements after it.
  * Similarly, if k≥i+j, that rules out B[1..j].
  *
- * We start at A[⌊n2⌋],B[⌊n2⌋], and depending on who’s bigger,
+ * We start at A[⌊n/2⌋],B[⌊n/2⌋], and depending on who’s bigger,
  * we use the above observations to rule out either the bottom or top half of one of the arrays.
  * If we rule the top of an array, we go back to our original problem only one of the arrays has shrunk in half.
  * If we rule out the bottom, we now have to find the (k− number of elements thrown) smallest element in the halved array and the untouched one.
