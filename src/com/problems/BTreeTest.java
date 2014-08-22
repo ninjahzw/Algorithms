@@ -8,7 +8,7 @@ import java.util.PriorityQueue;
  */
 public class BTreeTest {
 
-    private class Node implements Comparable<Node>{
+    private static class Node implements Comparable<Node>{
 
         public int start;
         public int end;
@@ -27,13 +27,28 @@ public class BTreeTest {
         }
     }
 
-    public static void test(Node node){
-        PriorityQueue<Integer> pq = new PriorityQueue<Integer>();
-        //pq.add(length);
 
+    PriorityQueue<Node> pq = new PriorityQueue<Node>();
+
+    public void test(Node node){
+
+        int interval = (node.end - node.start)/4;
+        Node node1 = new Node(node.start, node.start + interval);
+        Node node2 = new Node(node.start + interval, node.start + 2*interval);
+        Node node3 = new Node(node.start + 2*interval, node.start + 3*interval);
+        Node node4 = new Node(node.start + 3*interval, node.start + 4* interval);
+
+        pq.add(node1);
+        pq.add(node2);
+        pq.add(node3);
+        pq.add(node4);
+
+        test(pq.remove());
     }
 
     public static void main(String[] args){
+        Node node = new Node(0,1024);
+
 
     }
 }
