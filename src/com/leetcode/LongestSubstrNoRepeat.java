@@ -23,27 +23,32 @@ public class LongestSubstrNoRepeat {
         char[] target = s.toCharArray();
 
         Map<Character,Integer> map = new HashMap<Character, Integer>();
-        int times = 0;
+        int times = 1;
         for (int i = 0 ; i < target.length; i ++){
             Integer current = map.get(target[i]);
             if ( current == null) {
                 longest ++;
-                map.put(target[i],1);
+                map.put(target[i],times); // all set value to current times.
             } else {
-                if (current <= times){
-                    longest ++;
-                    map.put(target[i],current ++);
+                if (current == times){
+                    longest = 1; // reset the result
+                    times ++; // proceed to next round.
+                    map.put(target[i],times);
                 } else {
-                    // reset the result
-                    longest = 1;
+
+                    longest ++;
+                    map.put(target[i],times);
                 }
             }
         }
 
-        return 1;
+        return longest;
     }
 
     public static void main (String[] args){
+
+        System.out.println (new LongestSubstrNoRepeat().lengthOfLongestSubstring("abcdeddffgdsnnf"));
+
         Map<Character,Integer> map = new HashMap<Character, Integer>();
         System.out.println(map.get(1));
     }
