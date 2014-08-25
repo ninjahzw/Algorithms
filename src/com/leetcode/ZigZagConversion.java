@@ -17,41 +17,41 @@ package com.leetcode;
  * convert("PAYPALISHIRING", 3) should return "PAHNAPLSIIGYIR".
  *
  *
- * Solution:
+ * Idea:
+ * What we need to do is to observe the pattern of each row.
+ * It can be found that for each row, it has a period of 2∗nRows−2 ,
+ * i.e., characters that are  2∗nRows−2 apart are in the same row.
+ * The first character in the first period is s[i] , where i is the row index.
+ * Except for the top and the bottom rows,
+ * there is (possibly) a second character in each period that is period−2∗i apart from the first one.
+ * With this pattern, we can work top-down and pick up characters at certain indices to make up the converted string.
  *
+ * Wrap-up:
+ * Little algorithmic insight is needed for this problem.
  *
  */
 public class ZigZagConversion {
 
     public String convert(String s, int nRows) {
-        char[] result = new char[s.length()];
-        int index = 0;
-        int i = 0;
+        if (nRows <= 1) { // ZigZag needs at least two rows
+            return s;
+        }
+        int period = 2 * nRows - 2;
+        int n = s.length();
+        String result = "";
+        // Scan each row
+        for (int i = 0; i < nRows; i++) { // add each row
+            for (int j = i; j < n; j += period) {
+                result += s.charAt(j);
+                // Possibly two characters in a period for all rows except the top and bottom one
+                // The second character is period-2*j apart from the first
+                if (i > 0 && i < nRows-1 && j+period-2*i < n) { // skip the first line and last line
+                    result += s.charAt(j + period - 2 * i);
+                }
+            }
+        }
 
-        if (nRows >= 1){
-            while (index < s.length()){
-                result[i] = s.charAt(index);
-                i ++;
-                index += 4;
-            }
-        }
-        if (nRows >= 2){
-            index = 1;
-            while (index < s.length()){
-                result[i] = s.charAt(index);
-                i ++;
-                index += 2;
-            }
-        }
-        if (nRows >= 3){
-            index = 2;
-            while (index < s.length()){
-                result[i] = s.charAt(index);
-                i ++;
-                index += 4;
-            }
-        }
-        return  String.valueOf(result);
+        return result;
     }
 
     public static void main(String[] args){
