@@ -15,19 +15,25 @@ package com.leetcode;
  * Throw an exception? Good, but what if throwing an exception is not an option? You would then have to re-design the function (ie, add an extra parameter).
  *
  * Idea:
- *
+ * We definitely can use String or char array to do this job which is simple to human brain.
+ * But here is a smarter method which is simple to computer, and is preferred in interview.
  *
  */
 public class ReverseInteger {
 
     public int reverse(int x) {
 
-        return -1;
+        int result = 0;
+        while (x != 0){ // this covers both positive and negative conditions.
+            result = result * 10 + x % 10;
+            x = x/10;
+        }
+        return result;
     }
 
     public static void main(String[] args){
-        int i = 123;
-        String s = String.valueOf(123);
+        int i = -123;
+        System.out.println(new ReverseInteger().reverse(i));
     }
 
 }
