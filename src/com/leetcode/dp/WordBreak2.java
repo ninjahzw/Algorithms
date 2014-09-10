@@ -1,4 +1,4 @@
-package com.leetcode;
+package com.leetcode.dp;
 
 import java.util.*;
 
@@ -124,7 +124,7 @@ public class WordBreak2 {
         dict.add("a");
 
         String s = "aaaaaaa";
-        System.out.println(new WordBreak2().wordBreak(s,dict));
+        System.out.println(new WordBreak2().wordBreak(s, dict));
     }
 
 }

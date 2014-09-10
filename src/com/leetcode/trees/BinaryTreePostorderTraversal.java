@@ -14,7 +14,7 @@ public class BinaryTreePostorderTraversal {
         TreeNode(int x) { val = x; }
     }
 
-    public List<Integer> preorderTraversal(TreeNode root) {
+    public List<Integer> postorderTraversal(TreeNode root) {
         List<Integer> result = new ArrayList<Integer>();
         if (root == null){
             return result;
@@ -45,7 +45,7 @@ public class BinaryTreePostorderTraversal {
         node2.left = node4;
         node3.right = node5;
 
-        List<Integer> result = new BinaryTreePostorderTraversal().preorderTraversal(node1);
+        List<Integer> result = new BinaryTreePostorderTraversal().postorderTraversal(node1);
         for (int one :result){
             System.out.println(one);
         }
