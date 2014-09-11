@@ -11,19 +11,22 @@ import java.util.PriorityQueue;
  * if
  *
  */
-public class BTreeTest {
+public class BTreeTraverseOrderTest {
 
-    private static class Node implements Comparable<Node>{
+
+    public double multiplier;
+
+    private class Node implements Comparable<Node>{
 
         public int start;
         public int end;
         public double priority;
-        private static double MULTIPLIER = 1.9;
+        private double MULTIPLIER = 0.8;
 
         public Node(int start, int end){
             this.start = start;
             this.end = end;
-            this.priority = end - MULTIPLIER * start;
+            this.priority = end - multiplier * start;
         }
 
         @Override
@@ -46,10 +49,18 @@ public class BTreeTest {
     PriorityQueue<Node> pq = new PriorityQueue<Node>();
     private static int FAN_OUT = 4;
 
+    public BTreeTraverseOrderTest(double offset){
+        this.multiplier = offset;
+    }
+
+    /**
+     * When # nodes is large, stack overflow error occurs.
+     * @param node
+     */
     public void test(Node node){
         System.out.println(pq.size());
 
-        int interval = (node.end - node.start)/4;
+        int interval = (node.end - node.start)/FAN_OUT;
 
         for (int i = 0 ; i < FAN_OUT; i ++){
             if (node.start < node.end - 1){
@@ -66,9 +77,49 @@ public class BTreeTest {
         test(chosen);
     }
 
-    public static void main(String[] args){
-        Node node = new Node(0,1024);
-        new BTreeTest().test(node);
+    /**
+     * Fix stack overflow error when # nodes is large.
+     * @param node
+     */
+    public void test1(Node node){
 
+        pq.add(node);
+        int max = 0;
+        while(!pq.isEmpty()){
+
+            node = pq.remove();
+            int interval = (node.end - node.start)/FAN_OUT;
+
+            for (int i = 0 ; i < FAN_OUT; i ++){
+                if (node.start < node.end - 1){
+                    pq.add(new Node(node.start + i*interval, node.start + (i+1)*interval));
+                }
+            }
+            //System.out.println(pq.remove() + " " + pq.remove() + " " + pq.remove() );
+            if (pq.isEmpty()){
+                break;
+            }
+            int size = pq.size();
+            if (size > max){
+                max = size;
+            }
+
+            //System.out.println(chosen.priority);
+        }
+
+        System.out.println(max);
+    }
+
+
+    public void start(){
+        Node node = new Node(0,1024);
+        this.test1(node);
+    }
+
+    public static void main(String[] args){
+        for (double i = 0.0 ; i < 9.9; i+=0.1) {
+            System.out.print(i + "\t");
+            new BTreeTraverseOrderTest(i).start();
+        }
     }
 }
