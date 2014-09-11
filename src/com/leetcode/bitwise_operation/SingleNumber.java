@@ -17,6 +17,9 @@ package com.leetcode.bitwise_operation;
  * a XOR b XOR c = a XOR (b XOR c)  which means the order of the operation does not affect.
  * is right, so we can just simply XOR all elements of the array and the final number will be the result!
  *
+ * ---------
+ * similar problem shown in problems.FindOddNumberOfOccurrence.
+ *
  */
 public class SingleNumber {
 
