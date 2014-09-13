@@ -22,45 +22,70 @@ package com.leetcode;
 
  */
 public class RegulaExpressionMatching {
+
     public boolean isMatch(String s, String p) {
 
         int i = 0, j = 0;
-        char previousp = p.charAt(0);// always keep the previous value of p (for * calculation)
+        char previousp = 'a';// always keep the previous value of p (for * calculation)
         boolean stared = false;
         while (i < s.length() || j < p.length()){
-            if (i == s.length()-1){
-                return true;
-            }
-            if (j == p.length()-1){
+
+            if (i == s.length()){ // string i is over
+                if (p.length() -1 - j <= 2){
+                    if (p.charAt(p.length()-1) == '*'){
+                        return true;
+                    }
+                    return false;
+                } else {
+                    return false;
+                }
 
             }
+
+            if (j == p.length()){ // string j is over
+                if (!stared){
+                    return false;
+                }
+            }
+
             char ones = s.charAt(i);
+            char onep = p.charAt(j);
+
+
+            if (!stared && onep == '*'){ // this will consume 0 or more elements in p.
+                stared = true;
+            }
 
             if (stared){
-                if (previousp == ones){
+                if (previousp == ones || previousp == '.'){
                     i ++;
                     continue;
                 } else {
                     stared = false;
-                }
-            }
-
-            char onep = p.charAt(j);
-
-            if (onep == '*'){ // this will consume 0 or more elements in p.
-                stared = true;
-            }
-            if (ones == onep){
-                if (ones == onep || onep == '.'){
+                    j ++;
                     continue;
                 }
             }
-            previousp = onep;
+
+            if (ones == onep || onep == '.'){
+                i ++; j ++;
+                previousp = onep;
+                continue;
+            } else {
+                if (j < p.length() - 1){
+                    previousp = onep;
+                    j ++;
+                    continue;
+                } else {
+                    return false;
+                }
+            }
+
         }
         return true;
     }
 
     public static void main(String[] args){
-
+        System.out.println(new RegulaExpressionMatching().isMatch("aaba","ab*a*c*a"));
     }
 }

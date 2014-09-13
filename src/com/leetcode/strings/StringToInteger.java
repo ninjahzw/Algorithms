@@ -1,4 +1,4 @@
-package com.leetcode;
+package com.leetcode.strings;
 
 /**
  * Created by zhou001 on 8/25/2014.

@@ -1,4 +1,4 @@
-package com.leetcode;
+package com.leetcode.LinkedList;
 
 /**
  * !! Important
@@ -7,15 +7,6 @@ package com.leetcode;
  * Created by houzhaowei on 8/16/14.
  */
 public class InsertionSortLinkedList {
-
-    private static class ListNode {
-        int val;
-        ListNode next;
-        ListNode(int x) {
-            val = x;
-            next = null;
-        }
-    }
 
 //    public ListNode insertionSortList(ListNode head) {
 //
