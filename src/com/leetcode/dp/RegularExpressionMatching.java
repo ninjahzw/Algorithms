@@ -1,4 +1,4 @@
-package com.leetcode;
+package com.leetcode.dp;
 
 /**
  * Created by Zhaowei on 9/11/2014.
@@ -21,7 +21,7 @@ package com.leetcode;
  isMatch("aab", "c*a*b") → true
 
  */
-public class RegulaExpressionMatching {
+public class RegularExpressionMatching {
 
     public boolean isMatch(String s, String p) {
 
@@ -73,9 +73,11 @@ public class RegulaExpressionMatching {
                 continue;
             } else {
                 if (j < p.length() - 1){
-                    previousp = onep;
-                    j ++;
-                    continue;
+                    if (p.indexOf(j + 1) == '*') {
+                        previousp = onep;
+                        j++;
+                        continue;
+                    }
                 } else {
                     return false;
                 }
@@ -86,6 +88,6 @@ public class RegulaExpressionMatching {
     }
 
     public static void main(String[] args){
-        System.out.println(new RegulaExpressionMatching().isMatch("aaba","ab*a*c*a"));
+        System.out.println(new RegularExpressionMatching().isMatch("aaba","ab*a*c*a"));
     }
 }
