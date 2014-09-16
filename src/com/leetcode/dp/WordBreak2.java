@@ -57,7 +57,16 @@ public class WordBreak2 {
             if (dict.contains(s.substring(START_POSITION, i+1))) {
                 tmp.get(i).add(START_POSITION - 1);// NOTE, here is -1, not 0.
             }
-
+            /**
+             * here I check for each element i is I if there are previous 'possible' points j
+             * (points that are the end indices of valid words ) that the sub string between j and i is
+             * also in the dict.
+             *
+             * Alternatively, we can also do a traverse on the dict at each 'possible' points,
+             * and for each possible point i and word in the dict, check substr(i+word.length) is equal to word.
+             * if does, then add (i+word)th word as a new 'possible' point.
+             * Doing this recursively until the end.
+             */
             for (int j = 0; j < i; j ++) {
                 LinkedList l = tmp.get(j);
                 if (l != null && l.size() != 0) {
