@@ -104,7 +104,7 @@ public class WordBreak2 {
      */
     private void assemble(ArrayList<LinkedList<Integer>> tmp, int i, List<String> result, String original, String current){
         LinkedList<Integer> ll = tmp.get(i);
-        System.out.println("--> " + ll);
+
         for (int one : ll){
             // make sure for each recursion, the method get a new string
             String s = current;

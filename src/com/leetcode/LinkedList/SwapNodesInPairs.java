@@ -57,6 +57,12 @@ public class SwapNodesInPairs {
         return resultHead.next;
     }
 
+    /**
+     * Use two pointers pre and cur go together
+     * Create a node before the head, so we can do this recursively.
+     * @param head
+     * @return
+     */
     public ListNode simplerSwapPairs(ListNode head) {
         ListNode pre = new ListNode(0);
         pre.next = head;
@@ -66,7 +72,7 @@ public class SwapNodesInPairs {
             pre.next = cur.next;
             cur.next = pre.next.next;
             pre.next.next = cur;
-            pre = cur;
+            pre = cur; // this is actually two steps forward
             cur = cur.next;
         }
         return head.next;
@@ -83,7 +89,7 @@ public class SwapNodesInPairs {
         node2.next = node3;
         node3.next = node4;
 
-        ListNode node = new SwapNodesInPairs().simplerSwapPairs(node1);
+        ListNode node = new SwapNodesInPairs().swapPairs(node1);
 
         while (node != null){
             System.out.println(node.val);
