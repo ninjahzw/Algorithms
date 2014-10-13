@@ -57,6 +57,7 @@ public class ConstructBinaryTree {
     }
 
     public static void main(String[] args){
-        TreeNode result = new ConstructBinaryTree().buildTree(new int[]{1,2}, new int[]{2,1});
+        TreeNode result = new ConstructBinaryTree().buildTree(new int[]{4,2,6,5,7,1,3}, new int[]{1,6,7,5,2,3,1});
+        System.out.print(result.left + " " + result.val + " " + result.right.val + " " + result.right.left + " " + result.right.right );
     }
 }
