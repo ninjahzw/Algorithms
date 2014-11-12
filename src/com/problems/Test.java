@@ -53,9 +53,15 @@ public class Test {
 //        Map<String,String> map = new TreeMap<String, String>();
 //        map.put(null, "");
 
-        String a = "abcd";
-        String b = a.replace("bc","BC");
-        System.out.print(a + " " + b);
+//        String a = "abcd";
+//        String b = a.replace("bc","BC");
+//        System.out.print(a + " " + b);
         new Test().test();
+
+//        String a = "    .   .   ";
+//        for (char b : a.toCharArray()){
+//            System.out.println(b);
+//        }
+
     }
 }

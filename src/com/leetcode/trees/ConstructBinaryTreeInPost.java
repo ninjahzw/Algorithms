@@ -18,7 +18,7 @@ package com.leetcode.trees;
  * Using the length of left sub-tree, we can identify left and right sub-trees in post-order array.
  * Recursively, we can build up the tree.
  */
-public class ConstructBinaryTree {
+public class ConstructBinaryTreeInPost {
 
     public TreeNode buildTree(int[] inorder, int[] postorder) {
         return buildTreeRec(inorder, 0, inorder.length-1, postorder, 0, postorder.length-1);
@@ -57,7 +57,7 @@ public class ConstructBinaryTree {
     }
 
     public static void main(String[] args){
-        TreeNode result = new ConstructBinaryTree().buildTree(new int[]{4,2,6,5,7,1,3}, new int[]{1,6,7,5,2,3,1});
+        TreeNode result = new ConstructBinaryTreeInPost().buildTree(new int[]{4,2,6,5,7,1,3}, new int[]{1,6,7,5,2,3,1});
         System.out.print(result.left + " " + result.val + " " + result.right.val + " " + result.right.left + " " + result.right.right );
     }
 }
