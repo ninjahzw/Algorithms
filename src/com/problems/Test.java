@@ -1,5 +1,6 @@
 package com.problems;
 
+import java.text.DecimalFormat;
 import java.util.*;
 
 /**
@@ -22,7 +23,16 @@ public class Test {
         System.out.println(a);
     }
 
+    public static String readableFileSize(long size) {
+        if(size <= 0) return "0";
+        final String[] units = new String[] { "B", "kB", "MB", "GB", "TB" };
+        int digitGroups = (int) (Math.log10(size)/Math.log10(1024));
+        System.out.println(digitGroups);
+        return new DecimalFormat("#,##0.#").format(size/Math.pow(1024, digitGroups)) + " " + units[digitGroups];
+    }
+
     public static void main(String[] args){
+        System.out.println(new Test().readableFileSize(203));
 //        StringBuffer a = new StringBuffer("123");
 //        StringBuffer b = new StringBuffer("1");
 //        b.append(a);
@@ -53,16 +63,16 @@ public class Test {
 //        Map<String,String> map = new TreeMap<String, String>();
 //        map.put(null, "");
 
-//        String a = "abcd";
-//        String b = a.replace("bc","BC");
-//        System.out.print(a + " " + b);
+        String a = "abcd";
+        String b = a.replace("bc","BC");
+        System.out.print(a + " " + b);
         new Test().test();
         System.out.println("abdadadacregvmdgrtrthrthrtgrgvervevergerhtabdadadacregvmdgrtrthrthrtgrgvervevergerhta".hashCode());
 
-//        String a = "    .   .   ";
-//        for (char b : a.toCharArray()){
-//            System.out.println(b);
-//        }
-
+        char c = '1';
+        int ic = c;
+        int aa = 1;
+        String bb = (char)(aa + '0') + "a";
+        System.out.println(bb);
     }
 }

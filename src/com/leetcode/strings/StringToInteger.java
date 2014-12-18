@@ -58,6 +58,21 @@ public class StringToInteger {
         return (int)result;
     }
 
+
+    public static String itoa(int x)     {
+        boolean negative = false;
+        String s = "";
+        if (x == 0) return "0";
+        negative = (x<0);
+        if (negative) x = -1 * x; // must convert it to positive before reminder operation
+        while (x != 0)   {
+            s = (char)(48 + (x % 10)) + s; // add char to front of s
+            x = x / 10; // integer division gives quotient
+        }
+        if (negative) s = "-" + s;
+        return s;
+    }
+
     public static void main(String[] args){
         System.out.println(new StringToInteger().atoi("+1"));
     }

@@ -18,5 +18,7 @@ public class Test {
         String d = new String ("aaa");
         System.out.println(c==d);
         System.out.println(c.equals(c));
+
+
     }
 }
