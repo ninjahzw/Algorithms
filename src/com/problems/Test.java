@@ -57,6 +57,7 @@ public class Test {
 //        String b = a.replace("bc","BC");
 //        System.out.print(a + " " + b);
         new Test().test();
+        System.out.println("abdadadacregvmdgrtrthrthrtgrgvervevergerhtabdadadacregvmdgrtrthrthrtgrgvervevergerhta".hashCode());
 
 //        String a = "    .   .   ";
 //        for (char b : a.toCharArray()){
