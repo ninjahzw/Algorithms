@@ -1,4 +1,4 @@
-package com.problems;
+package com.problems.test;
 
 import java.text.DecimalFormat;
 import java.util.*;
@@ -62,7 +62,9 @@ public class Test {
 //        System.out.println(c);
 //        Map<String,String> map = new TreeMap<String, String>();
 //        map.put(null, "");
-
+        Map map = new HashMap();
+        map.put(1,1);
+        System.out.println("--->" + map.get(2));
         String a = "abcd";
         String b = a.replace("bc","BC");
         System.out.print(a + " " + b);

@@ -32,7 +32,7 @@ public class LongestSubstrNoRepeatK {
 
     public static void main (String[] args){
 
-        System.out.println (new LongestSubstrNoRepeatK().lengthOfLongestSubstring("abcdefcgggc1234567890987654456", 2));
+        System.out.println (new LongestSubstrNoRepeatK().lengthOfLongestSubstring("123", 2));
 
     }
 }

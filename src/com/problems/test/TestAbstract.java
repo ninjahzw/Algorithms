@@ -1,4 +1,4 @@
-package com.problems;
+package com.problems.test;
 
 /**
  * Created by houzhaowei on 12/1/14.
